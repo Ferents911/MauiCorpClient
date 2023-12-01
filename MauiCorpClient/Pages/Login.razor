@@ -1,0 +1,35 @@
+﻿@layout LoginLayout
+@page "/"
+<div class="container">
+	<div>
+		<img class="login-logo" src="img/bootstrap.png">
+	</div>
+	<div class="main">
+		<input type="checkbox" id="chk" aria-hidden="true">
+
+		<div class="signup">
+			<form>
+				<label class="login-label" for="chk" aria-hidden="true">Sign up</label>
+				<input class="login-input" type="text" name="txt" placeholder="User name" required="">
+				<input class="login-input" type="email" name="email" placeholder="Email" required="">
+				<input class="login-input" type="password" name="pswd" placeholder="Password" required="">
+				<button class="login-button">Sign up</button>
+			</form>
+		</div>
+
+		<div class="login">
+			<form>
+				<label class="login-label" for="chk" aria-hidden="true">Login</label>
+				<input class="login-input" type="email" name="email" placeholder="Email" required="">
+				<input class="login-input" type="password" name="pswd" placeholder="Password" required="">
+				<NavLink href="home">
+					<button class="login-button">Login</button>
+				</NavLink>
+			</form>
+		</div>
+	</div>
+</div>
+
+@code {
+
+}

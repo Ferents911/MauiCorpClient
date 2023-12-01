@@ -67,6 +67,27 @@ a, .btn-link {
     display: none;
 }
 
+.page {
+    height: 100vh;
+}
+
+.bottom-bar-wrapper {
+    margin-top: auto;
+    background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.bottom-bar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bottom-bar-nav-link img {
+    width: 32px;
+    height: 32px;
+}
+
 @supports (-webkit-touch-callout: none) {
     .status-bar-safe-area {
         display: flex;
