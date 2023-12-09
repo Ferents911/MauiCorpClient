@@ -23,7 +23,7 @@ else
 }
 
 @code {
-    private IEnumerable<Root>? roots = Array.Empty<Root>();
+    private IEnumerable<Сompany>? roots = Array.Empty<Сompany>();
     private bool getRootsError;
     private bool shouldRender;
 
@@ -31,23 +31,23 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var request = new HttpRequestMessage(HttpMethod.Get,
-            "https://jsonplaceholder.org/users");
+        // var request = new HttpRequestMessage(HttpMethod.Get,
+        //     "https://yourloyalty.space/api/companies");
 
-        var response = await client.SendAsync(request);
+        // var response = await client.SendAsync(request);
 
-        if (response.IsSuccessStatusCode)
-        {
-            using var responseStream = await response.Content.ReadAsStreamAsync();
-            roots = await JsonSerializer.DeserializeAsync
-                <IEnumerable<Root>>(responseStream);
-        }
-        else
-        {
-            getRootsError = true;
-        }
+        // if (response.IsSuccessStatusCode)
+        // {
+        //     using var responseStream = await response.Content.ReadAsStreamAsync();
+        //     roots = await JsonSerializer.DeserializeAsync
+        //         <IEnumerable<Сompany>>(responseStream);
+        // }
+        // else
+        // {
+        //     getRootsError = true;
+        // }
 
-        shouldRender = true;
+        // shouldRender = true;
     }
 
 }

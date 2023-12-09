@@ -72,10 +72,13 @@ a, .btn-link {
 }
 
 .bottom-bar-wrapper {
-    margin-top: auto;
+    display: flex;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
     background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
     padding-top: 5px;
-    padding-bottom: 5px;
+    padding-bottom: 7px;
 }
 
 .bottom-bar {
