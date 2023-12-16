@@ -1,0 +1,52 @@
+﻿.company-search-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: fixed;
+    width: 97%;
+    left: 2%;
+    top: 100px;
+    z-index: 10;
+}
+
+.company-search-bar .bottom-search-panel {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+.company-search-bar .bottom-search-panel .company-search-input {
+    width: 48%;
+}
+
+
+.company-search-input {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px -2px 38px rgba(61, 61, 61, 0.25);
+}
+
+.company-search-input input {
+    width: 80%;
+    border: none;
+    color: #848484;
+    font-family: Raleway;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    border-radius: 10px;
+    height: 48px;
+}
+
+
+
+.company-search-input input:focus {
+    border: none;
+    outline: none;
+}
+
+.company-search-input img {
+    max-width: 24px;
+    max-height: 24px;
+    padding-left: 10px;
+}

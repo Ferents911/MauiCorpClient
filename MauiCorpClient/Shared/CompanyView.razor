@@ -1,0 +1,51 @@
+﻿<div class="company">
+    <div class="company-header">
+        <div class="company-logo">
+            <img src="img/loyalty-logo-small.png" />
+        </div>
+        <div class="company-info">
+            <h4 class="company-title">@Name</h4>
+            <p class="company-short-description">@ShortDescription</p>
+        </div>
+    </div>
+    <div class="company-footer">
+        <div class="d-flex">
+            <div class="company-footer-item">
+                <img src="img/company-category.png" />
+                <span>Магазини</span>
+            </div>
+            <div class="company-footer-item">
+                <img src="img/company-location.png" />
+                <span>@Location</span>
+            </div>
+        </div>
+        <div class="d-flex">
+            <div class="company-footer-loyalty">
+                <span>Знижки до 20%</span>
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+
+    [Parameter]
+    public string Id { get; set; }
+
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public string ShortDescription { get; set; }
+
+    [Parameter]
+    public string Description { get; set; }
+
+    [Parameter]
+    public string Location { get; set; }
+
+    [Parameter]
+    public string Logo { get; set; }
+
+    [Parameter]
+    public string Categories { get; set; }
+}

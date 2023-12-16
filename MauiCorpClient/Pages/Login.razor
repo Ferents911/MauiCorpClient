@@ -44,7 +44,7 @@
 	protected async void Register()
 	{
 		var request = new HttpRequestMessage(HttpMethod.Post,
-			"https://yourloyalty.space/api/auth/user/register");
+			"https://yourloyalty.space/api/auth/users/register");
 
 		var jsonContent = JsonConvert.SerializeObject(RegisterModel);
 
@@ -61,7 +61,7 @@
 	protected async void Authorize()
 	{
 		var request = new HttpRequestMessage(HttpMethod.Post,
-			"https://yourloyalty.space/api/auth/user/login");
+			"https://yourloyalty.space/api/auth/users/login");
 
 		var jsonContent = JsonConvert.SerializeObject(LoginModel);
 
@@ -79,8 +79,6 @@
 			await SecureStorage.Default.SetAsync("access_token", loginResponse.Token);
 
 			await LoginUser();
-
-			await App.Current.MainPage.DisplayAlert("q", NavManager.Uri, "ok");
 		}
 	}
 

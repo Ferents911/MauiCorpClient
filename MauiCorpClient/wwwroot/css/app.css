@@ -4,6 +4,14 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+.input {
+    outline: none !important;
+}
+
+.input:focus {
+    outline: none !important;
+}
+
 h1:focus {
     outline: none;
 }
@@ -76,19 +84,94 @@ a, .btn-link {
     position: fixed;
     width: 100%;
     bottom: 0;
-    background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+    background: linear-gradient(to bottom, #412DAA, #412DAA, #24243e);
     padding-top: 5px;
     padding-bottom: 7px;
 }
 
 .bottom-bar {
     display: flex;
+    height: 50px;
     justify-content: space-between;
+    align-items: center;
+    margin: auto 0;
+}
+
+.w-containder {
+    width: 20%;
+}
+
+.bottom-bar-nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    z-index: 10;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+
+.bottom-bar-nav-link span {
+    text-decoration: none;
+    color: #FFF;
+    font-family: 'Raleway';
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    transition: transform 0.3s ease-in-out;
 }
 
 .bottom-bar-nav-link img {
+    width: 16px;
+    height: 16px;
+    transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+
+.bottom-bar-nav-link.selected .icon-wrapper {
+    background-color: #412DAA;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 16px;
+    transform: translate(0, -25px);
+    border-radius: 50%;
+    transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+    z-index: 11;
+}
+
+.bottom-bar-nav-link.selected img {
     width: 32px;
     height: 32px;
+    transition: width 0.3s all, height 0.3s ease-in-out;
+}
+
+.bottom-bar-nav-link.selected span {
+    z-index: 10;
+    transform: translate(0, -15px);
+}
+
+.top-bar {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    background-color: #412DAA;
+    color: #fff;
+}
+
+.top-bar-content {
+    display: flex;
+    align-items: center;
+}
+
+.top-bar-content h5 {
+    padding-left: 15px;
+}
+
+.top-bar-content img {
+    width: 64px;
+    height: 64px;
 }
 
 @supports (-webkit-touch-callout: none) {

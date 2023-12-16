@@ -1,0 +1,57 @@
+﻿@using MauiCorpClient.Services;
+@inject NavigationService NavigationService;
+@inherits ComponentBase
+
+<div class="nav-item px-2 w-container">
+    <NavLink href="@Href" class=@($"bottom-bar-nav-link {(NavigationService.ActiveContext[Index])}")
+    @onclick="() => AnimateNavLink(Index)">
+        <div class="icon-wrapper">
+            <img src=@Icon />
+        </div>
+        <span>@Text</span>
+    </NavLink>
+</div>
+
+@code {
+    [Parameter] public int Index { get; set; }
+    [Parameter] public string Text { get; set; }
+    [Parameter] public string Icon { get; set; }
+    [Parameter] public string Href { get; set; }
+
+    private bool isAnimating = false;
+
+    private async Task AnimateNavLink(int itemIndex)
+    {
+
+        if (isAnimating)
+        {
+            return;
+        }
+
+        isAnimating = true;
+
+        NavigationService.SetActiveContext(itemIndex);
+
+        StateHasChanged();
+
+        await Task.Delay(300);
+
+        NavigationService.SetActiveContext(itemIndex);
+        isAnimating = false;
+
+        if (NavigationService.ActiveContext[itemIndex] != "selected")
+        {
+            StateHasChanged();
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        NavigationService.OnStateChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        NavigationService.OnStateChange -= StateHasChanged;
+    }
+}

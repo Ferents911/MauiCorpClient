@@ -1,0 +1,62 @@
+﻿@page "/companies"
+@using MauiCorpClient.Data.Model;
+@using MauiCorpClient.Data.Response;
+@using Newtonsoft.Json;
+@using Newtonsoft.Json.Linq;
+@using System.Net.Http.Headers;
+@inject HttpClient client;
+
+<div class="companies-page">
+    
+    @if (getCompaiesError || companies is null)
+    {
+        <p>Unable to get companies</p>
+    }
+    else
+    {
+        <CompanySearch />
+        <div class="d-flex flex-column justify-content-center">
+            @foreach (var company in companies)
+            {
+                <CompanyView  Name="@company.Name" ShortDescription="@company.ShortDescription" Location="@company.Location"/>
+            }
+        </div>
+    }
+</div>
+
+
+@code {
+
+
+    private IEnumerable<Company>? companies = Array.Empty<Company>();
+    private bool getCompaiesError;
+    private bool shouldRender;
+
+    protected override bool ShouldRender() => shouldRender;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var token = await SecureStorage.Default.GetAsync("access_token");
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+        var request = new HttpRequestMessage(HttpMethod.Get,
+            "https://yourloyalty.space/api/companies");
+
+        var response = await client.SendAsync(request);
+
+        if (response.IsSuccessStatusCode)
+        {
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var companyData = JObject.Parse(responseContent)["data"].ToString() ;
+
+            var companiesResponse = JsonConvert.DeserializeObject<CompanyResponse>(responseContent);
+            companies = companiesResponse.Companies;
+        }
+        else
+        {
+            getCompaiesError = true;
+        }
+
+        shouldRender = true;
+    }
+}
