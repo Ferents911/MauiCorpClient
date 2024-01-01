@@ -5,8 +5,8 @@
     position: fixed;
     width: 97%;
     left: 2%;
-    top: 100px;
-    z-index: 10;
+    top: 99px;
+    z-index: 1000;
 }
 
 .company-search-bar .bottom-search-panel {

@@ -5,50 +5,14 @@
 <footer class="bottom-bar-wrapper">
     <div class="container-fluid">
         <nav class="bottom-bar flex-row">
-            <div class="nav-item px-1"></div>
             <BottomBarItem Href="fetchdata" Index="0" Icon="img/main-icon.svg" Text="Головна" />
             <BottomBarItem Href="companies" Index="1" Icon="img/home-icon.svg" Text="Компанії" />
             <BottomBarItem Href="fetchdata" Index="2" Icon="img/qr-icon.svg" Text="QR" />
             <BottomBarItem Href="fetchdata" Index="3" Icon="img/map-icon.svg" Text="Карта" />
-            <BottomBarItem Href="fetchdata" Index="4" Icon="img/user-icon.svg" Text="Профіль" />
-            <div class="nav-item px-1"></div>
+            <BottomBarItem Href="userprofile" Index="4" Icon="img/user-icon.svg" Text="Профіль" />
         </nav>
     </div>
 </footer>
 
 @code {
-    // private bool isAnimating = false;
-
-    // private async Task AnimateNavLink(int itemIndex)
-    // {
-    //     if (isAnimating)
-    //     {
-    //         return;
-    //     }
-
-    //     isAnimating = true;
-
-    //     // Add the animating class
-    //     NavigationService.SetActiveContext(itemIndex);
-
-    //     // Trigger a re-render to apply the new class and start the animation
-    //     StateHasChanged();
-
-    //     // Wait for the animation duration (you can adjust this)
-    //     await Task.Delay(300);
-
-    //     // Remove the animating class
-    //     NavigationService.SetActiveContext(itemIndex);
-    //     isAnimating = false;
-    // }
-
-    // protected override void OnInitialized()
-    // {
-    //     NavigationService.OnStateChange += StateHasChanged;
-    // }
-
-    // public void Dispose()
-    // {
-    //     NavigationService.OnStateChange -= StateHasChanged;
-    // }
 }

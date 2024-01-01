@@ -1,4 +1,8 @@
-﻿<div class="company">
+﻿@inject NavigationManager NavManager;
+@inject ProgressBarService ProgressBarService
+@inject AppStateService AppState
+
+<NavLink class="company" @onclick="OpenCompanyDetails">
     <div class="company-header">
         <div class="company-logo">
             <img src="img/loyalty-logo-small.png" />
@@ -25,7 +29,7 @@
             </div>
         </div>
     </div>
-</div>
+</NavLink>
 @code {
 
     [Parameter]
@@ -48,4 +52,30 @@
 
     [Parameter]
     public string Categories { get; set; }
+
+    private void OpenCompanyDetails()
+    {
+        var company = new Company
+        {
+            Id = Id,
+            Name = Name,
+            ShortDescription = ShortDescription,
+            Description = Description,
+            Location = Location,
+            Logo = Logo,
+            Categories = Categories
+        };
+
+
+
+        var companyParams = JsonConvert.SerializeObject(company);
+
+        byte[] bytes = Encoding.Default.GetBytes(companyParams);
+
+        var encodedCompanyParams = Convert.ToBase64String(bytes);
+
+        ProgressBarService.Visible = true;
+        AppState.SetPageLoaded(false);
+        NavManager.NavigateTo($"/company/{encodedCompanyParams}");
+    }
 }

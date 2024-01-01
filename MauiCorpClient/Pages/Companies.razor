@@ -5,6 +5,8 @@
 @using Newtonsoft.Json.Linq;
 @using System.Net.Http.Headers;
 @inject HttpClient client;
+@inject TopBarSharedStateService SharedState
+@inject ProgressBarService ProgressBarService
 
 <div class="companies-page">
     
@@ -18,7 +20,7 @@
         <div class="d-flex flex-column justify-content-center">
             @foreach (var company in companies)
             {
-                <CompanyView  Name="@company.Name" ShortDescription="@company.ShortDescription" Location="@company.Location"/>
+                <CompanyView Id="@company.Id" Description ="@company.Description"  Name="@company.Name" ShortDescription="@company.ShortDescription" Location="@company.Location" Logo="" Categories=""/>
             }
         </div>
     }
@@ -36,6 +38,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        ProgressBarService.Visible = true;
+        SharedState.UpdateParameters(true, "img/loyalty-logo-small.png", "Привіт, Микола!", false);
         var token = await SecureStorage.Default.GetAsync("access_token");
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
@@ -58,5 +62,6 @@
         }
 
         shouldRender = true;
+        ProgressBarService.Visible = false;
     }
 }

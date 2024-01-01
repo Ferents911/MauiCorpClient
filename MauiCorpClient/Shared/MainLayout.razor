@@ -1,11 +1,46 @@
 ﻿@inherits LayoutComponentBase
+@inject TopBarSharedStateService SharedState
+@inject ProgressBarService ProgressBarService
 
-<div class="page">
-<TopBar />
+
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+@if (ProgressBarService.Visible)
+{
+    <div class="loader-shaded-bg">
+        <div class="progress-circular-container">
+            <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+        </div>
+    </div>
+}
+<div class="page" >
+    <TopBar HasTopPicture="@SharedState.HasTopPicture" Icon="@SharedState.Icon" Title="@SharedState.Title" IsCentered="@SharedState.IsCentered" />
     <main>
         <article class="content px-4">
             @Body
         </article>
     </main>
-<BottomBar />
+    <BottomBar />
 </div>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        SharedState.ParametersChanged += StateHasChanged;
+        ProgressBarService.OnVisibilityChanged += HandleVisibilityChanged;
+    }
+
+    public void Dispose()
+    {
+        SharedState.ParametersChanged -= StateHasChanged;
+        ProgressBarService.OnVisibilityChanged -= HandleVisibilityChanged;
+    }
+
+    private void HandleVisibilityChanged()
+    {
+        InvokeAsync(StateHasChanged); // Asynchronously request the component to re-render.
+    }
+}

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace MauiCorpClient.Services
 {
-    public class NavigationService
+    public class NavigationService : NavigationManager
     {
-        public string[] _activeContext { get; private set; } = { "selected", "", "", "", "" };
+        public string[] _activeContext { get; private set; } = { "", "selected", "", "", "" };
 
         public string[] ActiveContext
         {

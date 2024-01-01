@@ -1,5 +1,37 @@
 ﻿@inherits LayoutComponentBase
+@inject ProgressBarService ProgressBarService
+
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+@if (ProgressBarService.Visible)
+{
+    <div class="loader-shaded-bg">
+        <div class="progress-circular-container">
+            <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+        </div>
+    </div>
+}
 
 <div class="login-page">
     @Body
 </div>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        ProgressBarService.OnVisibilityChanged += HandleVisibilityChanged;
+    }
+
+    public void Dispose()
+    {
+        ProgressBarService.OnVisibilityChanged -= HandleVisibilityChanged;
+    }
+
+    private void HandleVisibilityChanged()
+    {
+        InvokeAsync(StateHasChanged); // Asynchronously request the component to re-render.
+    }
+}

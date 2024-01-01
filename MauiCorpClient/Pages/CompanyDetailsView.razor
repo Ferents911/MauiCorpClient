@@ -1,0 +1,138 @@
+﻿@page "/company/{Data}"
+@inject TopBarSharedStateService SharedState
+@inject ProgressBarService ProgressBarService
+@inject AppStateService AppState
+
+
+@if (!AppState.IsPageLoaded)
+{
+    @(ProgressBarService.Visible = true)
+}
+else
+{
+    <div class="company-detail-wrapper">
+        <div class="company-detail-header">
+            <img src="img/big-logo-copany.png" />
+            <div class="company-detail-category">
+                <img src="img/company-category.png" />
+                <span>Магазини</span>
+            </div>
+            <p class="company-detail-description">
+                @CompanyModel.Description
+            </p>
+            <div class="d-flex flex-column w-100">
+                <div class="company-detail-read-full">
+                   <span class="tex">Читати повністю</span>
+                    <img src="img/arrow-bottom.png" />
+                </div>
+                <a href="#" class="full-w-flat-button">Приєднатись</a>
+            </div>
+            <div class="company-detail-loyalty">
+                <span>Бонусна система</span>
+                <div class="bonuses-details">
+                    <div class="bonuses-row">
+                        <div class="bonuses-block">
+                            <span class="bonuses-number">50</span>
+                            <span class="bonuses-text">Вступних балів</span>
+                        </div>
+                        <div class="bonuses-block">
+                            <span class="bonuses-number">5%</span>
+                            <span class="bonuses-text">Знижка для нових користувачів</span>
+                        </div>
+                    </div>
+                    <div class="bonuses-row">
+                        <div class="bonuses-block">
+                            <span class="bonuses-number">20%</span>
+                            <span class="bonuses-text">Максимальна знижка</span>
+                        </div>
+                        <div class="bonuses-block detail">
+                            <span class="bonuses-text">Детальніше</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <span>Схожі компанії</span>
+            <MudCarousel Class="reccomended-companies mud-width-full" ShowArrows="false" ShowBullets="true" EnableSwipeGesture="true" AutoCycle="false" TData="object">
+                <MudCarouselItem Class="reccomended-companies-carousel-item" Transition="transition">
+                    <div class="d-flex reccomended-company">
+                        <img src="img/big-logo-copany.png" />
+                        <p>Lego-1</p>
+                        <p>Львів, Україна</p>
+                        <p>Магазини</p>
+                    </div>
+                </MudCarouselItem>
+                <MudCarouselItem Class="reccomended-companies-carousel-item" Transition="transition">
+                    <div class="d-flex  reccomended-company">
+                        <img src="img/big-logo-copany.png" />
+                        <p>Lego-2</p>
+                        <p>Львів, Україна</p>
+                        <p>Магазини</p>
+                    </div>
+                </MudCarouselItem>
+                <MudCarouselItem Class="reccomended-companies-carousel-item" Transition="transition">
+                    <div class="d-flex  reccomended-company">
+                        <img src="img/big-logo-copany.png" />
+                        <p>Lego-3</p>
+                        <p>Львів, Україна</p>
+                        <p>Магазини</p>
+                    </div>
+                </MudCarouselItem>
+                <MudCarouselItem Class="reccomended-companies-carousel-item" Transition="transition">
+                    <div class="d-flex reccomended-company">
+                        <img src="img/big-logo-copany.png" />
+                        <p>Lego-4</p>
+                        <p>Львів, Україна</p>
+                        <p>Магазини</p>
+                    </div>
+                </MudCarouselItem>
+                <MudCarouselItem Class="reccomended-companies-carousel-item" Transition="transition">
+                    <div class="d-flex reccomended-company">
+                        <img src="img/big-logo-copany.png" />
+                        <p>Lego-5</p>
+                        <p>Львів, Україна</p>
+                        <p>Магазини</p>
+                    </div>
+                </MudCarouselItem>
+                <MudCarouselItem Class="reccomended-companies-carousel-item" Transition="transition">
+                    <div class="d-flex reccomended-company">
+                        <img src="img/big-logo-copany.png" />
+                        <p>Lego-6</p>
+                        <p>Львів, Україна</p>
+                        <p>Магазини</p>
+                    </div>
+                </MudCarouselItem>
+            </MudCarousel>
+        </div>
+    </div>
+}
+
+@code {
+
+    private Transition transition = Transition.Slide;
+
+    private Company CompanyModel { get; set; }
+
+    [Parameter]
+    public string Data { get; set; }
+
+    protected override async void OnParametersSet()
+    {
+        await Task.Delay(1000);
+        AppState.SetPageLoaded(true);
+        ProgressBarService.Visible = false;
+        CompanyModel = FromBase64(Data);
+        SharedState.UpdateParameters(false, string.Empty, CompanyModel.Name, true);
+        StateHasChanged();
+
+    }
+
+    private Company FromBase64(string base64Text)
+    {
+        byte[] bytes = Convert.FromBase64String(base64Text);
+
+        string json = Encoding.Default.GetString(bytes);
+
+        return JsonConvert.DeserializeObject<Company>(json);
+    }
+}

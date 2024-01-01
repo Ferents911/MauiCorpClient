@@ -2,21 +2,20 @@
 @inject NavigationService NavigationService;
 @inherits ComponentBase
 
-<div class="nav-item px-2 w-container">
-    <NavLink href="@Href" class=@($"bottom-bar-nav-link {(NavigationService.ActiveContext[Index])}")
-    @onclick="() => AnimateNavLink(Index)">
-        <div class="icon-wrapper">
-            <img src=@Icon />
-        </div>
+<NavLink href="@Href" class=@($"bottom-bar-nav-link {(NavigationService.ActiveContext[Index])}")
+@onclick="() => AnimateNavLink(Index)">
+    <div class="icon-wrapper">
+        <img src=@Icon />
         <span>@Text</span>
-    </NavLink>
-</div>
+    </div>
+</NavLink>
 
 @code {
     [Parameter] public int Index { get; set; }
     [Parameter] public string Text { get; set; }
     [Parameter] public string Icon { get; set; }
     [Parameter] public string Href { get; set; }
+
 
     private bool isAnimating = false;
 

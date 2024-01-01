@@ -1,0 +1,56 @@
+﻿@page "/userprofilepersonaldata"
+@inject TopBarSharedStateService SharedState
+
+<div class="user-profile-sub-wrapper">
+    <div class="user-profile-location">
+        <label>Профіль</label><span class="oi oi-chevron-right"></span><label>Персональна інформація</label>
+    </div>
+    <div class="group-wrapper l-shadow centered">
+        <div class="user-profile-personal-data">
+            <div class="d-flex w-100 justify-content-center">
+                <div class="input-wrapper">
+                    <span>Ім'я</span>
+                    <input class="user-profile-input" />
+                </div>
+            </div>
+            <div class="input-wrapper">
+                <span>Email</span>
+                <input class="user-profile-input" />
+            </div>
+            <div class="input-wrapper">
+                <span>Номер телефону</span>
+                <input class="user-profile-input" />
+            </div>
+        </div>
+    </div>
+    <div class="d-flex flex-column w-100">
+        <a href="#" class="full-w-flat-button custom-position">Зберегти зміни</a>
+    </div>
+    <div class="group-wrapper l-shadow centered">
+        <div class="user-profile-personal-data">
+            <div class="input-wrapper">
+                <span>Введіть старий пароль</span>
+                <input class="user-profile-input" />
+            </div>
+            <div class="input-wrapper">
+                <span>Введіть новий пароль</span>
+                <input class="user-profile-input" />
+            </div>
+            <div class="input-wrapper">
+                <span>Повторіть новий пароль</span>
+                <input class="user-profile-input" />
+            </div>
+        </div>
+    </div>
+    <div class="d-flex flex-column w-100">
+        <a href="#" class="full-w-flat-button custom-position">Змінити пароль</a>
+    </div>
+</div>
+
+@code {
+    protected override void OnParametersSet()
+    {
+        SharedState.UpdateParameters(true, "img/big-logo-copany.png", "Микола Ференц" , false);
+        StateHasChanged();
+    }
+}

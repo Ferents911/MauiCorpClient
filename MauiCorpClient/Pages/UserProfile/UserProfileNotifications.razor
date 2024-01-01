@@ -1,0 +1,45 @@
+﻿@page "/userprofilenotifications"
+@inject TopBarSharedStateService SharedState
+
+<div class="user-profile-sub-wrapper">
+    <div class="user-profile-location">
+        <label>Профіль</label><span class="oi oi-chevron-right"></span><label>Мої повідомлення</label>
+    </div>
+    <div class="group-wrapper">
+        <div class="user-profile-notifications">
+            <p>Не пропусти оновлення від компаній до який долучився.</p>
+            <div class="notification-input-wrapper">
+                <input class="user-profile-input" />
+                <div class="switch-wrapper">
+                    <MudSwitch Class="mud-switch" @bind-Value="@IsNotificationsEnabled" Color="Color.Primary"></MudSwitch>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="user-profile-messages">
+        <div class="message">
+            <div class="message-head">
+                <img src="img/big-logo-copany.png" />
+                <div class="message-info">
+                    <span class="message-info-sender">Lego City</span>
+                    <span class="message-info-date">20.12.2022 10:00</span>
+                </div>
+            </div>
+            <div class="message-body">
+                <span class="message-content">
+                    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as oppo sedIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private bool IsNotificationsEnabled = true;
+
+    protected override void OnParametersSet()
+    {
+        SharedState.UpdateParameters(true, "img/big-logo-copany.png", "Микола Ференц", false);
+        StateHasChanged();
+    }
+}

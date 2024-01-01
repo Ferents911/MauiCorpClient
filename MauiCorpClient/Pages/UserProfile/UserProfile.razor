@@ -1,0 +1,63 @@
+﻿@page "/userprofile"
+@inject NavigationManager NavManager;
+@inject TopBarSharedStateService SharedState
+
+
+<div class="user-profile-wrapper">
+    <div class="user-profile-logo">
+        <img src="img/big-logo-copany.png" />
+    </div>
+    <div class="group-wrapper">
+        <ul class="user-profile-navigation">
+            <li class="navigation-wrapper"><img src="img/user-profile-personal.png" /><NavLink class="nav-link" @onclick="OpenPersonalData">Персональна інформація</NavLink></li>
+            <li class="navigation-wrapper"><img src="img/user-profile-chat.png" /><NavLink class="nav-link" @onclick="OpenNotifications">Повідомлення</NavLink></li>
+            <li class="navigation-wrapper"><img src="img/user-profile-companies.png" /><NavLink class="nav-link">Мої компанії</NavLink></li>
+            <li class="navigation-wrapper"><img src="img/user-profile-about.png" /><NavLink class="nav-link">Про застосунок</NavLink></li>
+            <li class="navigation-wrapper"><img src="img/user-profile-personal.png" /><NavLink class="nav-link" @onclick="Logout">Вихід</NavLink> </li>
+        </ul>
+    </div>
+    <div class="group-wrapper">
+        <div class="user-profile-notifications">
+            <p>Сповіщення допоможуть вам бути завжди першим дізнаватися відкриття залучення нових компаній чи важливих новин від них.</p>
+            <div class="notification-input-wrapper">
+                <input class="user-profile-input"/>
+                <div class="switch-wrapper">
+                    <MudSwitch Class="mud-switch" @bind-Value="@IsNotificationsEnabled" Color="Color.Primary"></MudSwitch>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="group-wrapper">
+        <div class="user-profile-join">
+            <p>Хочете долучити свою компанію до Your Loyalty Space?</p>
+            <a href="#" class="user-profile-button">Стати партнером</a>
+        </div>
+    </div>
+</div>
+
+@code {
+    private bool IsNotificationsEnabled = true;
+
+    protected override void OnParametersSet()
+    {
+        SharedState.UpdateParameters(false, string.Empty, "Микола Ференц", true);
+        StateHasChanged();
+    }
+
+    private void Logout()
+    {
+        SecureStorage.Default.Remove("access_token");
+
+        NavManager.NavigateTo("/");
+    }
+
+    private void OpenNotifications()
+    {
+        NavManager.NavigateTo("/userprofilenotifications");
+    }
+
+    private void OpenPersonalData()
+    {
+        NavManager.NavigateTo("/userprofilepersonaldata");
+    }
+}

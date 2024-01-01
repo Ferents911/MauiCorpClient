@@ -4,12 +4,14 @@
 @using MauiCorpClient.Data.Response;
 @using Newtonsoft.Json;
 @using System.Text;
+@using System.Net.Http.Headers;
 @inject HttpClient client;
 @inject NavigationManager NavManager;
+@inject ProgressBarService ProgressBarService
 
 <div class="container">
 	<div>
-		<img class="login-logo" src="img/bootstrap.png">
+		<img class="login-logo" src="img/your-loyalty_logo.png">
 	</div>
 	<div class="main">
 		<input type="checkbox" id="chk" aria-hidden="true">
@@ -43,6 +45,8 @@
 
 	protected async void Register()
 	{
+		ProgressBarService.Visible = true;
+
 		var request = new HttpRequestMessage(HttpMethod.Post,
 			"https://yourloyalty.space/api/auth/users/register");
 
@@ -56,16 +60,20 @@
 
 		await SecureStorage.Default.SetAsync("access_token", registrationResponse.Token);
 
+		ProgressBarService.Visible = false;
 	}
 
 	protected async void Authorize()
 	{
+		ProgressBarService.Visible = true;
 		var request = new HttpRequestMessage(HttpMethod.Post,
 			"https://yourloyalty.space/api/auth/users/login");
 
 		var jsonContent = JsonConvert.SerializeObject(LoginModel);
 
 		request.Content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+		var token = await SecureStorage.Default.GetAsync("access_token");
+		client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
 		var response = await client.SendAsync(request);
 
@@ -80,6 +88,7 @@
 
 			await LoginUser();
 		}
+		ProgressBarService.Visible = false;
 	}
 
 	private async Task LoginUser()
@@ -87,12 +96,14 @@
 		var token = await SecureStorage.Default.GetAsync("access_token");
 		if (token != null)
 		{
-			NavManager.NavigateTo("/home", true, true);
+			NavManager.NavigateTo("/home");
 		}
 	}
 
 	protected override async Task OnInitializedAsync()
 	{
+		ProgressBarService.Visible = true;
 		await LoginUser();
+		ProgressBarService.Visible = false;
 	}
 }

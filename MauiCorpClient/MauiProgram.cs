@@ -1,6 +1,7 @@
 ﻿using MauiCorpClient.Data;
 using MauiCorpClient.Services;
 using Microsoft.Extensions.Logging;
+using MudBlazor.Services;
 
 namespace MauiCorpClient
 {
@@ -11,6 +12,10 @@ namespace MauiCorpClient
             var builder = MauiApp.CreateBuilder();
             builder.Services.AddSingleton(sp => new HttpClient { });
             builder.Services.AddSingleton<NavigationService>();
+            builder.Services.AddSingleton<TopBarSharedStateService>();
+            builder.Services.AddSingleton<ProgressBarService>();
+            builder.Services.AddSingleton<AppStateService>();
+            builder.Services.AddMudServices();
             builder
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
